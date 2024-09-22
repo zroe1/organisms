@@ -2,7 +2,7 @@ class Pawn():
     def __init__(self, row, col, color):
         '''
         postion [Tuple(int, int)]: board position
-        color [Str]: "Black" or "White"
+        color [Str]: "black" or "white"
         '''
         self.row = row
         self.col = col
@@ -20,13 +20,13 @@ class Pawn():
         legal_moves = set() # return value #1
         can_transform = False # return value #2 
 
-        if (Board[self.row + 1][self.col] == None):
+        if (Board.board[self.row + 1][self.col] == None):
             legal_moves.add((self.row + 1, self.col))
-        if (Board[self.row + 1][self.col + 1] == None):
+        if (Board.board[self.row + 1][self.col + 1] == None):
             legal_moves.add(self.row + 1, self.col + 1)
-        if (Board[self.row + 1][self.col - 1] == None):
+        if (Board.board[self.row + 1][self.col - 1] == None):
             legal_moves.add(self.row + 1, self.col - 1)
-        if (Board[self.row + 1][self.col] == None and \
+        if (Board.board[self.row + 1][self.col] == None and \
             Board.size == self.row + 2):
             # piece can transform
             can_transform = True
@@ -46,13 +46,16 @@ class Pawn():
         '''
         old_row = self.row
         old_col = self.col
-        Board[row][col] = Board[old_row][old_col] # move the piece in the board class
+        Board.board[row][col] = Board.board[old_row][old_col] # move the piece in the board class
         self.row = row
         self.col = col
 
         if transform_into != None:
             # TODO: transform into another class (Queen, Knight, ect) if needed
             pass
+
+    def __str__(self) -> str:
+        return " P "
     
 
 
