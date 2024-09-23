@@ -14,7 +14,6 @@ class King():
 class Pawn():
     def __init__(self, row, col, color):
         '''
-        postion [Tuple(int, int)]: board position
         color (Color): BLACK or WHITE
         '''
         self.row = row
@@ -33,16 +32,28 @@ class Pawn():
         legal_moves = set() # return value #1
         can_transform = False # return value #2 
 
-        if (Board.board[self.row + 1][self.col] == None):
-            legal_moves.add((self.row + 1, self.col))
-        if (Board.board[self.row + 1][self.col + 1] == None):
-            legal_moves.add(self.row + 1, self.col + 1)
-        if (Board.board[self.row + 1][self.col - 1] == None):
-            legal_moves.add(self.row + 1, self.col - 1)
-        if (Board.board[self.row + 1][self.col] == None and \
-            Board.size == self.row + 2):
-            # piece can transform
-            can_transform = True
+        if self.color == Color.WHITE:
+            if (Board.board[self.row + 1][self.col] == None):
+                legal_moves.add((self.row + 1, self.col))
+            if (Board.board[self.row + 1][self.col + 1] != None):
+                legal_moves.add(self.row + 1, self.col + 1)
+            if (Board.board[self.row + 1][self.col - 1] != None):
+                legal_moves.add(self.row + 1, self.col - 1)
+            if (Board.board[self.row + 1][self.col] == None and \
+                Board.size == self.row + 2):
+                # piece can transform
+                can_transform = True
+        else:  # it must be true that color == Color.BLACK
+            if (Board.board[self.row - 1][self.col] == None):
+                legal_moves.add((self.row - 1, self.col))
+            if (Board.board[self.row - 1][self.col + 1] != None):
+                legal_moves.add(self.row - 1, self.col + 1)
+            if (Board.board[self.row - 1][self.col - 1] != None):
+                legal_moves.add(self.row - 1, self.col - 1)
+            if (Board.board[self.row - 1][self.col] == None and \
+                self.row - 2 == 0):
+                # piece can transform
+                can_transform = True
         
         return legal_moves, can_transform
     
