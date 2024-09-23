@@ -3,9 +3,9 @@ from peices_classes.peices import Pawn
 class Board:
     def __init__(self):
         self.size = 8
-        self.board = [[None for _ in range(self.size)] for _ in range(self.size)]
+        self.board = [[None for _ in range(self.size)] for _ in range(self.size + 2)]
         for j in range(self.size):
-            self.board[2][j] = Pawn(2, j, "white")
+            self.board[1][j] = Pawn(1, j, "white")
         for j in range(self.size):
             self.board[self.size - 2][j] = Pawn(self.size - 2, j, "black")
 
@@ -17,9 +17,6 @@ class Board:
             current_row = []
             for j in range(self.size):
                 current_piece = self.board[i][j]
-                # print(current_piece)
-                # print("*" * 80)
-                # print(str(current_piece))
                 if current_piece != None:
                     current_row += [f'|{current_piece}']
                 else:
@@ -29,4 +26,6 @@ class Board:
             print("".join(divider_row))
 
 b = Board()
+b.pprint_board()
+b.board[1][0].move(b, 3, 0)
 b.pprint_board()

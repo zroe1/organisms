@@ -1,8 +1,21 @@
+from enum import Enum
+
+class Color(Enum):
+    BLACK = 1
+    WHITE = 2
+
+class King():
+    def __init__(self, row, col, color):
+        '''
+        color (Color): BLACK or WHITE
+        '''
+
+
 class Pawn():
     def __init__(self, row, col, color):
         '''
         postion [Tuple(int, int)]: board position
-        color [Str]: "black" or "white"
+        color (Color): BLACK or WHITE
         '''
         self.row = row
         self.col = col
@@ -47,6 +60,7 @@ class Pawn():
         old_row = self.row
         old_col = self.col
         Board.board[row][col] = Board.board[old_row][old_col] # move the piece in the board class
+        Board.board[old_row][old_col] = None
         self.row = row
         self.col = col
 
